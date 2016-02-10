@@ -48,7 +48,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="index.html">Home</a></li>
-              <li><a href="map_reduce.html">Map Reduce</a></li>
+              <li><a href="map_reduce.html">MapReduce</a></li>
               <li><a href="hdfs.html">HDFS</a></li>
               <li><a href="hadoop.html">Hadoop</a></li>
               <li><a href="hive.html">Hive</a></li>
@@ -62,117 +62,50 @@
         <p class="lead">A distributed file system written in Java on which MapReduce programs are performed.</p>
       </div>
 
-      <h3>Three equal columns</h3>
-      <p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
-      <div class="row">
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-        <div class="col-md-4">.col-md-4</div>
-      </div>
+      <h3>What is HDFS?</h3>
+      <p>HDFS is a distributed file system written Java that is designed to run on commodity hardware. It is similar to other distributed file systems, but it places an emphasis on being highly fault-tolerant and provide streaming access to data</p>
+      <hr/>
 
-      <h3>Three unequal columns</h3>
-      <p>Get three columns <strong>starting at desktops and scaling to large desktops</strong> of various widths. Remember, grid columns should add up to twelve for a single horizontal block. More than that, and columns start stacking no matter the viewport.</p>
-      <div class="row">
-        <div class="col-md-3">.col-md-3</div>
-        <div class="col-md-6">.col-md-6</div>
-        <div class="col-md-3">.col-md-3</div>
-      </div>
+      <h3>HDFS Goals</h3> 
+      <ol>
+        <li>Hardware Failure</li>
+        <li>Streaming Data Access</li>
+        <li>Large Data Sets</li>
+        <li>Simple Coherency Model</li>
+        <li>Move Computation rather than Data</li>
+        <li>Portability Across Hardware and Software Platforms</li>
+      </ol>
+      <hr/>
 
-      <h3>Two columns</h3>
-      <p>Get two columns <strong>starting at desktops and scaling to large desktops</strong>.</p>
-      <div class="row">
-        <div class="col-md-8">.col-md-8</div>
-        <div class="col-md-4">.col-md-4</div>
-      </div>
+      <h3>HDFS Architecture</h3>
+      <p>HDFS has a master/slave architecture. A typical HDFS cluster has a single system that servers as a NameNode and multiple systems that serve as DataNodes</p>
 
-      <h3>Full width, single column</h3>
-      <p class="text-warning">No grid classes are necessary for full-width elements.</p>
+      <img src='img/hdfs_arch.png'/>
 
-      <hr>
+      <h4>NameNode</h4>
+      <p>The NameNode serves as the master machine for the file system's namespace. The NameNode  contains information about all the DataNodes: the files they have, their operating status, the set of files that exist in the file system, etc.</p>
 
-      <h3>Two columns with two nested columns</h3>
-      <p>Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns <strong>starting at desktops and scaling to large desktops</strong>, with another two (equal widths) within the larger column.</p>
-      <p>At mobile device sizes, tablets and down, these columns and their nested columns will stack.</p>
-      <div class="row">
-        <div class="col-md-8">
-          .col-md-8
-          <div class="row">
-            <div class="col-md-6">.col-md-6</div>
-            <div class="col-md-6">.col-md-6</div>
-          </div>
-        </div>
-        <div class="col-md-4">.col-md-4</div>
-      </div>
+      <p>Files in a typical HDFS cluster are highly replicated to ensure fault recovery. When a client sends a file to the NameNode for storage the NameNode breaks the file into groups of data called blocks. It then distributes the blocks across DataNodes based on various factors (disk space, speed, closeness to related data, etc.). The NameNode also performs block replication, when new blocks are stored or systems fail the NameNode will replicate the blocks on one DataNode and distribute the replicas across the file system.</p>
 
-      <hr>
+      <h4>DataNode</h4>
+      <p>The DataNodes are the slave systems, they simply store blocks of data and are unaware of the blocks they contain. Periodically they report their status (if healthy) to the NameNode, if a DataNode dies it is lost to HDFS.</p>
 
-      <h3>Mixed: mobile and desktop</h3>
-      <p>The Bootstrap 3 grid system has four tiers of classes: xs (phones), sm (tablets), md (desktops), and lg (larger desktops). You can use nearly any combination of these classes to create more dynamic and flexible layouts.</p>
-      <p>Each tier of classes scales up, meaning if you plan on setting the same widths for xs and sm, you only need to specify xs.</p>
-      <div class="row">
-        <div class="col-xs-12 col-md-8">.col-xs-12 .col-md-8</div>
-        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6">.col-xs-6</div>
-        <div class="col-xs-6">.col-xs-6</div>
-      </div>
+      <h5>
+        <a href='https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html#Introduction'>
+          Further Reference
+        </a>
+      </h5>
 
-      <hr>
+      <hr/>
 
-      <h3>Mixed: mobile, tablet, and desktop</h3>
+      <h3>Simple HDFS commands</h3>
+      <p>Once you have Hadoop installed you can make command line calls to the file system</p>
+      <kbd>$ hdfs dfs -l /</kbd><br/>
+      <kbd>Found 1 items</kbd><br/>
+      <kbd>-rw-r--r--   1 Vivek supergroup          0 2016-02-08 14:44 book.txt</kbd>
       <p></p>
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-lg-8">.col-xs-12 .col-sm-6 .col-lg-8</div>
-        <div class="col-xs-6 col-lg-4">.col-xs-6 .col-lg-4</div>
-      </div>
-      <div class="row">
-        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
-      </div>
 
-      <hr>
-
-      <h3>Column clearing</h3>
-      <p><a href="http://getbootstrap.com/css/#grid-responsive-resets">Clear floats</a> at specific breakpoints to prevent awkward wrapping with uneven content.</p>
-      <div class="row">
-        <div class="col-xs-6 col-sm-3">
-          .col-xs-6 .col-sm-3
-          <br>
-          Resize your viewport or check it out on your phone for an example.
-        </div>
-        <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-
-        <!-- Add the extra clearfix for only the required viewport -->
-        <div class="clearfix visible-xs"></div>
-
-        <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-        <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
-      </div>
-
-      <hr>
-
-      <h3>Offset, push, and pull resets</h3>
-      <p>Reset offsets, pushes, and pulls at specific breakpoints.</p>
-      <div class="row">
-        <div class="col-sm-5 col-md-6">.col-sm-5 .col-md-6</div>
-        <div class="col-sm-5 col-sm-offset-2 col-md-6 col-md-offset-0">.col-sm-5 .col-sm-offset-2 .col-md-6 .col-md-offset-0</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-5 col-lg-6">.col-sm-6 .col-md-5 .col-lg-6</div>
-        <div class="col-sm-6 col-md-5 col-md-offset-2 col-lg-6 col-lg-offset-0">.col-sm-6 .col-md-5 .col-md-offset-2 .col-lg-6 .col-lg-offset-0</div>
-      </div>
-
-
-    </div> <!-- /container -->
-
-
+      <br/><br/><br/><br/>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
