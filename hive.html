@@ -160,6 +160,10 @@
 
       <span>Count the Number of Entries:</span></br>
       <kbd>hive> SELECT COUNT(*) FROM u_data;</kbd><br/>
+      <kbd>Total jobs = 1</kbd><br/>
+      <kbd>Launching Job 1 out of 1</kbd><br/>
+      <kbd>100000</kbd><br/>
+      <kbd>Time taken: 1.978 seconds, Fetched: 1 row(s)</kbd>
       <p></p>
 
       <span>Create a script weekday_mapper.py</span></br>
@@ -169,35 +173,64 @@
 
         <span>for line in sys.stdin:</span><br/>
         <span>line = line.strip()</span><br/>
+        <span># Grabs a movie row</span><br/>
         <span>userid, movieid, rating, unixtime = line.split('\t')</span><br/>
+        <span># Converts the unix time to a weekday (1-7)</span><br/>
         <span>weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</span><br/>
+        <span># Maps the movie row to one with a weekday instead of a unix time</span>
         <span>print '\t'.join([userid, movieid, rating, str(weekday)])</span>
       </code>
       <p></p>
 
-      <span>Create a script weekday_mapper.py</span></br>
-        <code>
-          <span>CREATE TABLE u_data_new (</span><br/>
+      <span>Use the mapper script</span></br>
+        <kbd>
+          <span>hive> CREATE TABLE u_data_new (</span><br/>
             <span>userid INT,</span><br/>
             <span>movieid INT,</span><br/>
             <span>rating INT,</span><br/>
             <span>weekday INT)</span><br/>
           <span>ROW FORMAT DELIMITED</span><br/>
           <span>FIELDS TERMINATED BY '\t';</span><br/>
-          <br/>
-          <span>add FILE weekday_mapper.py;</span><br/>
-          <br/>
-          <span>INSERT OVERWRITE TABLE u_data_new</span><br/>
+        </kbd>
+        <br/>
+
+        <kbd>
+          <span>hive> add FILE weekday_mapper.py;</span><br/>
+        </kbd>
+        <br/>
+
+        <kbd>
+          <span>hive> INSERT OVERWRITE TABLE u_data_new</span><br/>
           <span>SELECT</span><br/>
             <span>TRANSFORM (userid, movieid, rating, unixtime)</span><br/>
             <span>USING 'python weekday_mapper.py'</span><br/>
             <span>AS (userid, movieid, rating, weekday)</span><br/>
           <span>FROM u_data;</span><br/>
-          <br/>
-          <span>SELECT weekday, COUNT(*)</span><br/>
+          <span>Total jobs = 3</span><br/>
+          <span>Launching Job 1 out of 3</span><br/>
+          <span>OK</span><br/>
+          <span>Time taken: 1.56 seconds</span><br/>
+        </kbd>
+        <br/>
+
+        <kbd>
+          <span>hive> SELECT weekday, COUNT(*)</span><br/>
           <span>FROM u_data_new</span><br/>
           <span>GROUP BY weekday;</span><br/>
-        </code>
+        </kbd>
+        <kbd>
+          <span>Total jobs = 1</span><br/>
+          <span>Launching Job 1 out of 1</span><br/>
+          <span>1 13341</span><br/>
+          <span>2 14337</span><br/>
+          <span>3 15812</span><br/>
+          <span>4 13469</span><br/>
+          <span>5 18489</span><br/>
+          <span>6 12508</span><br/>
+          <span>7 12044</span><br/>
+          <span>Time taken: 1.436 seconds, Fetched: 7 row(s)</span><br/>
+        </kbd>
+
       </span>
 
       <hr/>
