@@ -76,7 +76,7 @@
           Download Hive and move it to the installation location you want
         </li>
         <li>
-          <span>Add a <b>HIVE_HOME</b> enviornment variables based its installation location<span>
+          <span>Add a <b>HIVE_HOME</b> enviornment variable based its installation location<span>
           <br/>
           <kbd>$ export HIVE_HOME=/usr/local/hive/1.2.1/</kbd>
           <br/>
@@ -137,8 +137,8 @@
           Download the 100k MovieLens Data Set
         </a>
       </p>
-      <span>Create the table:</span><br/>
-      <kbd>CREATE TABLE u_data (</kbd><br/>
+      <span>Create the table u_data for movie data:</span><br/>
+      <kbd>hive> CREATE TABLE u_data (</kbd><br/>
       <kbd>userid INT,</kbd></br>
       <kbd>movieid INT,</kbd></br>
       <kbd>rating INT,</kbd></br>
@@ -148,7 +148,7 @@
       <kbd>STORED AS TEXTFILE;</kbd>
       <p></p>
 
-      <span>Load the data into Hive with the following command:</span></br>
+      <span>Load the data into u_data with the following command:</span></br>
       <kbd>hive> LOAD DATA LOCAL INPATH '[path]/ml-100k/u.data' OVERWRITE INTO TABLE u_data;</kbd><br/>
       <p></p>
 
@@ -224,8 +224,11 @@
           <span>7 12044</span><br/>
           <span>Time taken: 1.436 seconds, Fetched: 7 row(s)</span><br/>
         </kbd>
-
       </span>
+      <br/>
+      <h5><a href='https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-SimpleExampleUseCases'>
+      Further Reference
+      </a></h5>
 
       <hr/>
     </div> <!-- /container -->
