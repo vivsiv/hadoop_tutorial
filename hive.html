@@ -82,7 +82,7 @@
           Download Hive and move it to the installation location you want
         </li>
         <li>
-          <span>Add a <b>HIVE_HOME</b> enviornment variables based its installation location<b>(i.e.):</b><span>
+          <span>Add a <b>HIVE_HOME</b> enviornment variables based its installation location<span>
           <br/>
           <kbd>$ export HIVE_HOME=/usr/local/hive/1.2.1/</kbd>
           <br/>
@@ -156,6 +156,10 @@
 
       <span>Load the data into Hive with the following command:</span></br>
       <kbd>hive> LOAD DATA LOCAL INPATH '[path]/ml-100k/u.data' OVERWRITE INTO TABLE u_data;</kbd><br/>
+      <p></p>
+
+      <span>Count the Number of Entries:</span></br>
+      <kbd>hive> SELECT COUNT(*) FROM u_data;</kbd><br/>
 
       <hr/>
     </div> <!-- /container -->
