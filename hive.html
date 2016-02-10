@@ -161,17 +161,18 @@
 
       <span>Create a script weekday_mapper.py</span></br>
       <code>
-        <span>import sys</span><br/>
-        <span>import datetime</span><br/>
+        <p>import sys</p>
+        <p>import datetime</p><br/>
 
-        <span>for line in sys.stdin:</span><br/>
-        <span>line = line.strip()</span><br/>
-        <span># Grabs a movie row</span><br/>
-        <span>userid, movieid, rating, unixtime = line.split('\t')</span><br/>
-        <span># Converts the unix time to a weekday (1-7)</span><br/>
-        <span>weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</span><br/>
-        <span># Maps the movie row to one with a weekday instead of a unix time</span><br/>
-        <span>print '\t'.join([userid, movieid, rating, str(weekday)])</span>
+        <p>for line in sys.stdin:</p>
+        <p>line = line.strip()</p>
+        <p># Grabs a movie row</p>
+        <p>userid, movieid, rating, unixtime = line.split('\t')</p>
+        <p># Converts the unix time to a weekday (1-7)</p>
+        <p>weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</p>
+        <br/>
+        <p># Maps the movie row to one with a weekday instead of a unix time</p>
+        <p>print '\t'.join([userid, movieid, rating, str(weekday)])</p>
       </code>
       <p></p>
 
