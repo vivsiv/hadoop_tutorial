@@ -160,6 +160,45 @@
 
       <span>Count the Number of Entries:</span></br>
       <kbd>hive> SELECT COUNT(*) FROM u_data;</kbd><br/>
+      <p></p>
+
+      <span>Create a script weekday_mapper.py</span></br>
+      <code>
+        <span>import sys</span><br/>
+        <span>import datetime</span><br/>
+
+        <span>for line in sys.stdin:</span><br/>
+        <span>line = line.strip()</span><br/>
+        <span>userid, movieid, rating, unixtime = line.split('\t')</span><br/>
+        <span>weekday = datetime.datetime.fromtimestamp(float(unixtime)).isoweekday()</span><br/>
+        <span>print '\t'.join([userid, movieid, rating, str(weekday)])</span>
+      </code>
+      <p></p>
+
+      <span>Create a script weekday_mapper.py</span></br>
+        <code>
+          <span>CREATE TABLE u_data_new (</span><br/>
+            <span>userid INT,</span><br/>
+            <span>movieid INT,</span><br/>
+            <span>rating INT,</span><br/>
+            <span>weekday INT)</span><br/>
+          <span>ROW FORMAT DELIMITED</span><br/>
+          <span>FIELDS TERMINATED BY '\t';</span><br/>
+          <br/>
+          <span>add FILE weekday_mapper.py;</span><br/>
+          <br/>
+          <span>INSERT OVERWRITE TABLE u_data_new</span><br/>
+          <span>SELECT</span><br/>
+            <span>TRANSFORM (userid, movieid, rating, unixtime)</span><br/>
+            <span>USING 'python weekday_mapper.py'</span><br/>
+            <span>AS (userid, movieid, rating, weekday)</span><br/>
+          <span>FROM u_data;</span><br/>
+          <br/>
+          <span>SELECT weekday, COUNT(*)</span><br/>
+          <span>FROM u_data_new</span><br/>
+          <span>GROUP BY weekday;</span><br/>
+        </code>
+      </span>
 
       <hr/>
     </div> <!-- /container -->
