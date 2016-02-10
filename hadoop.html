@@ -151,6 +151,31 @@
       <hr/>
 
       <h3>Running Hadoop's 'Hello World', the Word Count program</h3>
+      <p>View the source code for <a href='https://github.com/vivsiv/hadoop_tutorial/blob/gh-pages/WordCount2.java'>WordCount2.java</a></p>
+      <p>Assuming the following:</p>
+      <ul>
+        <li>/user/joe/wordcount/input - input directory in HDFS</li>
+        <li>/user/joe/wordcount/output - output directory in HDFS</li>
+      </ul>
+      <span>Sample text-files as input</span><br/>
+      <kbd>$ bin/hadoop fs -ls /user/joe/wordcount/input/ /user/joe/wordcount/input/file01 /user/joe/wordcount/input/file02</kbd><br/>
+      <kbd>$ bin/hadoop fs -cat /user/joe/wordcount/input/file01</kbd><br/>
+      <kbd>Hello World Bye World</kbd><br/>
+      <kbd>$ bin/hadoop fs -cat /user/joe/wordcount/input/file02</kbd><br/>
+      <kbd>Hello Hadoop Goodbye Hadoop</kbd><br/>
+      <p></p>
+
+      <span>Run the Application</span><br/>
+      <kbd>$ bin/hadoop jar wc.jar WordCount /user/joe/wordcount/input /user/joe/wordcount/output</kbd><br/>
+      <p></p>
+
+      <span>Output</span><br/>
+      <kbd>$ bin/hadoop fs -cat /user/joe/wordcount/output/part-r-00000`</kbd><br/>
+      <kbd>Bye 1</kbd><br/>
+      <kbd>Goodbye 1</kbd><br/>
+      <kbd>Hadoop 2</kbd><br/>
+      <kbd>Hello 2</kbd><br/>
+      <kbd>World 2`</kbd><br/>
       <hr/>
     </div> <!-- /container -->
 
