@@ -33,13 +33,112 @@
 
   <body>
     <div class="container">
+    <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Navigate</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="map_reduce.html">MapReduce</a></li>
+              <li><a href="hdfs.html">HDFS</a></li>
+              <li><a href="hadoop.html">Hadoop</a></li>
+              <li><a href="hive.html">Hive</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
       <div class="page-header">
         <h1>Hive</h1>
-        <p class="lead">Basic grid layouts to get you familiar with building within the Bootstrap grid system.</p>
+        <p class="lead">An SQL Like query syntax built on top of Hadoop</p>
+        <a class='btn btn-primary' href="https://issues.apache.org/jira/browse/HIVE/fixforversion/12329345/?selectedTab=com.atlassian.jira.jira-projects-plugin:version-summary-panel">
+          Download Hive
+        </a>
       </div>
 
-      <h3>Three equal columns</h3>
+      <h3>What is Hive?</h3>
+      <p>Hive is a powerfule data warehousing application built on top of Hadoop, it allows clients to access data using Hive QL, a language that is very similar to SQL.</p>
+      <p>With Hive you can execute MapReduce jobs on Hadoop clusters (similar to the WordCount program) via an SQL like query language.</p>
+      <hr/>
+
+
+      <h3>Hive Installation</h3>
+      <ol>
+        <li>
+          <span>Make sure you already have Hadoop <a href='hadoop.html'>installed</a> and have a HADOOP HOME environment variable</span>
+          <br/>
+          <kbd>$ export HADOOP_HOME=hadoop-install-dir</kbd>
+        </li>
+        <li>
+          Download Hive and move it to the installation location you want
+        </li>
+        <li>
+          <span>Add a <b>HIVE_HOME</b> enviornment variables based its installation location<b>(i.e.):</b><span>
+          <br/>
+          <kbd>$ export HIVE_HOME=/usr/local/hive/1.2.1/</kbd>
+          <br/>
+          <kbd>$ export PATH=$HIVE_HOME/bin:$path</kbd>
+        </li>
+        <li>
+          From here you can do other things like configure the hive metastore, set environment configurations in the hive-site.xml file (see further reference for details)
+        </li>
+      </ol>
+      <br/>
+      <h5>Further Reference</h5>
+      <ul>
+        <li><a href="https://cwiki.apache.org/confluence/display/Hive/GettingStarted#GettingStarted-InstallingHivefromaStableRelease">
+          Official Site
+        </a></li>
+        <li><a href="http://www.cloudera.com/documentation/archive/cdh/4-x/4-2-0/CDH4-Installation-Guide/cdh4ig_topic_18.html">
+          Cloudera
+        </a></li>
+      </ul>
+      <hr/>
+
+      <h3>Running Hive</h3>
+      <span>If your Hive installation has been added to your path you should be able to run Hive by simply typing:</span>
+      <br/>
+      <kbd>$ hive</kbd><br/>
+      <kbd>hive></kbd>
+      <p></p>
+
+      <p>Once hive is running create Hive tables with Hive's Data Definition Language (DDL)</p>
+      <span>Create a table:</span><br/>
+      <kbd>hive> CREATE TABLE pokes (foo INT, bar STRING);</kbd><br/>
+      <kbd>OK</kbd><br/>
+      <kbd>Time taken: 0.164 seconds</kbd>
+      <p></p>
+
+      <span>See the available tables:</span><br/>
+      <kbd>hive> SHOW tables;</kbd><br/>
+      <kbd>OK</kbd></br>
+      <kbd>pokes</kbd></br>
+      <kbd>Time taken: 1.103 seconds, Fetched: 1 row(s)</kbd>
+      <p></p>
+
+      <span>Describe a table:</span><br/>
+      <kbd>hive> DESCRIBE pokes;</kbd><br/>
+      <kbd>OK</kbd></br>
+      <kbd>foo int</kbd></br>
+      <kbd>bar string</kbd></br>
+      <kbd>Time taken: 0.379 seconds, Fetched: 2 row(s)</kbd>
+      <p></p>
+
+      <p>Other SQL like operations such as: SELECT, JOIN, INSERT are possible, see the <a href='https://cwiki.apache.org/confluence/display/Hive/LanguageManual'>Language Manual</a> for specifics</p>
+      <hr/>
+
+      <h3>Fun With Movie Data!</h3>
+
+
       <p>Get three equal-width columns <strong>starting at desktops and scaling to large desktops</strong>. On mobile devices, tablets and below, the columns will automatically stack.</p>
       <div class="row">
         <div class="col-md-4">.col-md-4</div>

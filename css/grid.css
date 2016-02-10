@@ -1,6 +1,11 @@
 h4 {
   margin-top: 25px;
 }
+
+body {
+  padding-top: 20px;
+}
+
 .row {
   margin-bottom: 20px;
 }
